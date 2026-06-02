@@ -245,11 +245,11 @@
   align-items: center;
   gap: 2cqw;
   border-top: 1px solid rgba(40, 36, 28, 0.12);
-  padding-top: 1.8cqw;
+  padding-top: 1.3cqw;
 }
 .pass__barcode {
   flex: 0 0 20cqw;
-  height: 5cqw;
+  height: 3.8cqw;
   background: repeating-linear-gradient(
     90deg,
     #1f1b15 0,
@@ -289,7 +289,7 @@
     width: 44cqw;
   }
   .pass {
-    width: 78cqw; /* wider so it reads as a rectangle, not a square */
+    width: 64cqw; /* narrower so it isn't too wide on phones */
     bottom: 18%; /* raised up so it overlaps the dossier paper, not float below */
   }
 }
