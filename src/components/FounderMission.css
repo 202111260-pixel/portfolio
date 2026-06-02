@@ -52,7 +52,7 @@
   left: 3%;
   top: 3%;
   width: 64cqw;
-  padding: 5.5cqw 6cqw 24cqw; /* extra bottom space so the pass overlaps empty paper, never text */
+  padding: 5.5cqw 6cqw 28cqw; /* extra bottom space so the pass overlaps empty paper, never text */
   background:
     repeating-linear-gradient(180deg, transparent, transparent 5.6cqw, rgba(40, 36, 28, 0.05) 5.6cqw, rgba(40, 36, 28, 0.05) calc(5.6cqw + 1px)),
     #f6f3ea;
@@ -276,7 +276,7 @@
   }
   .doc {
     width: 72cqw;
-    padding-bottom: 16cqw; /* a little empty paper below the story */
+    padding-bottom: 32cqw; /* taller paper so the pass sits on it */
   }
   .doc__title,
   .doc__hand {
@@ -290,6 +290,6 @@
   }
   .pass {
     width: 64cqw; /* narrower so it isn't too wide on phones */
-    bottom: 18%; /* raised up so it overlaps the dossier paper, not float below */
+    bottom: 8%; /* sits BELOW the photo (clears it) while still on the taller paper */
   }
 }
