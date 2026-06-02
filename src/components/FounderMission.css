@@ -272,12 +272,13 @@
 @media (max-width: 560px) {
   .about__stage {
     width: 100%;
-    /* taller stage on phones gives the dossier room so the pass overlaps
-       empty paper, never the story text */
-    aspect-ratio: 1 / 1.36;
+    aspect-ratio: 1 / 1.24;
   }
   .doc {
     width: 72cqw;
+    /* extra empty paper at the bottom so the pass sits ON the dossier
+       (overlapping paper) while the story text stays well above it */
+    padding-bottom: 34cqw;
   }
   .doc__title,
   .doc__hand {
