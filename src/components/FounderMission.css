@@ -272,22 +272,24 @@
 @media (max-width: 560px) {
   .about__stage {
     width: 100%;
-    aspect-ratio: 1 / 1.18;
+    /* taller stage on phones gives the dossier room so the pass overlaps
+       empty paper, never the story text */
+    aspect-ratio: 1 / 1.36;
   }
   .doc {
     width: 72cqw;
   }
   .doc__title,
   .doc__hand {
-    max-width: 40cqw;
+    max-width: 42cqw;
   }
   .doc__story {
-    max-width: 38cqw;
+    max-width: 44cqw; /* wider = fewer lines = shorter dossier */
   }
   .photo {
     width: 44cqw;
   }
   .pass {
-    width: 62cqw;
+    width: 78cqw; /* wider so it reads as a rectangle, not a square */
   }
 }
