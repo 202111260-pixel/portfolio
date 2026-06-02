@@ -1,0 +1,60 @@
+/* ============================================================
+   NAVBAR — fully transparent, auto-contrast over any section
+   (mix-blend-mode) with a sliding active indicator.
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: clamp(0.85rem, 2.2vw, 1.5rem);
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: max-content;
+  max-width: calc(100% - 1rem);
+  z-index: 100;
+  /* white marks invert against whatever scrolls behind = always legible */
+  mix-blend-mode: difference;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2.4vw, 2.25rem);
+}
+
+.nav__links a {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(0.66rem, 1vw, 0.78rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.15rem;
+  opacity: 0.62;
+  transition: opacity 0.3s ease;
+}
+.nav__links a:hover,
+.nav__links a.is-active {
+  opacity: 1;
+}
+
+/* the sliding underline (shared layout id animates between items) */
+.nav__ind {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.1rem;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+}
+
+@media (max-width: 420px) {
+  .nav__links a {
+    letter-spacing: 0.1em;
+    padding: 0.4rem 0.08rem;
+  }
+}

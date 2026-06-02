@@ -1,0 +1,150 @@
+/* ============================================================
+   ARCH FLOW — live AI system architecture infographic
+   ============================================================ */
+.arch {
+  position: relative;
+  border-radius: 18px;
+  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+  background: linear-gradient(165deg, #23241b, #14150e);
+  border: 1px solid rgba(233, 231, 221, 0.12);
+  box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: var(--bone);
+}
+
+.arch__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.arch__title {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.62rem, 1vw, 0.74rem);
+  letter-spacing: 0.18em;
+  color: var(--bone-dim);
+}
+.arch__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: rgba(233, 231, 221, 0.6);
+}
+.arch__live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7bbf63;
+  box-shadow: 0 0 0 0 rgba(123, 191, 99, 0.5);
+  animation: archPulse 2.2s ease-out infinite;
+}
+@keyframes archPulse {
+  0% { box-shadow: 0 0 0 0 rgba(123, 191, 99, 0.5); }
+  70%, 100% { box-shadow: 0 0 0 7px rgba(123, 191, 99, 0); }
+}
+
+/* stage */
+.arch__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.12;
+}
+.arch__wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.arch__base {
+  fill: none;
+  stroke: rgba(233, 231, 221, 0.16);
+  stroke-width: 1.4;
+}
+.arch__flow {
+  fill: none;
+  stroke: rgba(233, 231, 221, 0.92);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 3 17;
+  animation: archFlow 2.4s linear infinite;
+}
+@keyframes archFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* nodes */
+.arch__node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.6rem;
+  min-width: clamp(64px, 17%, 92px);
+  background: #2a2b22;
+  border: 1px solid rgba(233, 231, 221, 0.26);
+  border-radius: 9px;
+  z-index: 2;
+  cursor: default;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.arch__node:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  border-color: rgba(233, 231, 221, 0.6);
+  box-shadow: 0 0 0 4px rgba(233, 231, 221, 0.06);
+  z-index: 3;
+}
+.arch__nodeIc {
+  width: clamp(16px, 2.2vw, 20px);
+  height: clamp(16px, 2.2vw, 20px);
+  color: var(--bone);
+}
+.arch__nodeIc svg {
+  width: 100%;
+  height: 100%;
+}
+.arch__nodeLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.5rem, 1vw, 0.62rem);
+  letter-spacing: 0.06em;
+  color: rgba(233, 231, 221, 0.85);
+  white-space: nowrap;
+}
+
+/* tags + caption */
+.arch__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: clamp(0.75rem, 2vw, 1.1rem);
+}
+.arch__tags span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.62rem, 1.1vw, 0.78rem);
+  letter-spacing: 0.04em;
+  padding: 0.26rem 0.6rem;
+  border: 1px solid rgba(233, 231, 221, 0.22);
+  border-radius: 999px;
+  color: var(--bone);
+}
+.arch__caption {
+  margin-top: 0.7rem;
+  font-size: clamp(0.72rem, 1.2vw, 0.86rem);
+  color: var(--bone-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch__flow,
+  .arch__live i {
+    animation: none;
+  }
+}

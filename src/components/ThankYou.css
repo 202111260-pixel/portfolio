@@ -1,0 +1,574 @@
+/* ============================================================
+   CONTACT — editorial split with a real contact form
+   ============================================================ */
+
+.cta {
+  position: relative;
+  overflow: hidden; /* doodles ring the box without spawning a scrollbar */
+  background:
+    radial-gradient(110% 80% at 85% 0%, #f5f3ec, transparent 55%),
+    #efece4;
+  color: var(--ink);
+  min-height: 100dvh;
+  display: flex;
+  padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 4vw, 3.5rem)
+    clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.cta__inner {
+  width: 100%;
+  max-width: 1180px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100dvh - 2 * clamp(1.5rem, 4vw, 2.75rem));
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* top meta */
+.cta__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: clamp(0.62rem, 1vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.55);
+}
+.cta__clock {
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.06em;
+}
+
+/* main split */
+.cta__main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+/* ---- left: invitation ---- */
+.cta__intro {
+  display: flex;
+  flex-direction: column;
+}
+.cta__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 0.82;
+  font-size: clamp(3.5rem, 11vw, 9rem);
+  color: var(--ink);
+}
+.cta__dotmark {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+}
+.cta__lead {
+  margin-top: 1.5rem;
+  max-width: 38ch;
+  font-size: clamp(0.98rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+  color: #2a2a2a;
+}
+.cta__email {
+  margin-top: 1.75rem;
+  width: fit-content;
+  font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.25s ease;
+}
+.cta__email:hover {
+  border-bottom-color: var(--ink);
+}
+.cta__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.75rem;
+  margin-top: 1.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #2a2a2a;
+}
+.cta__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cta__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #3f8f4f;
+  box-shadow: 0 0 0 0 rgba(63, 143, 79, 0.5);
+  animation: ctaPulse 2.4s ease-out infinite;
+}
+@keyframes ctaPulse {
+  0% { box-shadow: 0 0 0 0 rgba(63, 143, 79, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 9px rgba(63, 143, 79, 0); }
+}
+.cta__socials {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.75rem;
+}
+.cta__socials a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 10, 10, 0.2);
+  color: var(--ink);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease, border-color 0.3s ease;
+}
+.cta__socials a:hover {
+  transform: translateY(-3px);
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.cta__socials svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================================
+   RIGHT: multi-step infographic box, ringed by hand-drawn arrows
+   ============================================================ */
+.formwrap {
+  position: relative;
+  margin: clamp(2.5rem, 5vw, 3.75rem) clamp(1rem, 3vw, 2.25rem)
+    clamp(2.5rem, 5vw, 3.5rem); /* breathing room for the doodles */
+}
+
+/* ---- hand-drawn doodles that surround the box ---- */
+.doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: #1f1b15;
+  z-index: 3;
+}
+.doodle {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.doodle svg {
+  width: clamp(46px, 5vw, 70px);
+  height: auto;
+  overflow: visible;
+}
+.doodle__note {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+/* the path draws itself in once it scrolls into view */
+.doodle svg path {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: doodleDraw 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.doodle svg path:nth-child(2) {
+  animation-delay: 0.55s;
+}
+@keyframes doodleDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.doodle--tl {
+  top: -2.6rem;
+  left: -0.4rem;
+}
+.doodle--tl .doodle__note { transform: rotate(-5deg); }
+
+.doodle--tr {
+  top: -2.7rem;
+  right: -0.3rem;
+  flex-direction: row-reverse;
+}
+.doodle--tr .doodle__note { transform: rotate(4deg); }
+
+.doodle--r {
+  top: 42%;
+  right: -3.4rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+.doodle--r .doodle__note { transform: rotate(6deg); }
+
+.doodle--bl {
+  bottom: -2.5rem;
+  left: 0.6rem;
+  flex-direction: column-reverse;
+  gap: 0.1rem;
+}
+.doodle--bl .doodle__note { transform: rotate(-6deg); }
+
+.doodle--br {
+  bottom: -2.4rem;
+  right: 1rem;
+}
+.doodle--br .doodle__note { transform: rotate(3deg); }
+
+/* ---- the box ---- */
+.wzd {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, #fcfaf3, #f4f1e7);
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  border-radius: 22px;
+  padding: clamp(1.6rem, 3.4vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.1rem, 2.2vw, 1.4rem);
+  box-shadow: 0 50px 90px -50px rgba(40, 36, 28, 0.5),
+    0 2px 6px -3px rgba(40, 36, 28, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.wzd__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.wzd__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.wzd__counter {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: rgba(10, 10, 10, 0.4);
+}
+.wzd__counter b {
+  color: var(--ink);
+  font-weight: 700;
+}
+.wzd__counter i {
+  margin: 0 0.15rem;
+  font-style: normal;
+}
+
+/* ---- infographic progress rail ---- */
+.wzd__rail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.2rem 0 0.4rem;
+  padding: 0 2px;
+}
+.wzd__track {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 50%;
+  height: 3px;
+  transform: translateY(-50%);
+  background: rgba(10, 10, 10, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.wzd__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--ink);
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wzd__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid rgba(10, 10, 10, 0.18);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: rgba(10, 10, 10, 0.45);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wzd__node.is-done {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.wzd__node.is-active {
+  border-color: var(--ink);
+  color: var(--ink);
+  transform: scale(1.12);
+  box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.07);
+}
+.wzd__node svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---- the animated field stage ---- */
+.wzd__stage {
+  position: relative;
+  min-height: 9.5rem;
+}
+.wzd__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.wzd__kicker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.45);
+}
+.wzd__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.wzd__field input,
+.wzd__field textarea {
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(10, 10, 10, 0.16);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.wzd__field input::placeholder,
+.wzd__field textarea::placeholder {
+  color: rgba(10, 10, 10, 0.3);
+}
+.wzd__field input:focus,
+.wzd__field textarea:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.08);
+}
+.wzd__err {
+  min-height: 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #b4452f;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.wzd__err.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- success state ---- */
+.wzd__done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1rem 0 0.4rem;
+  min-height: 12rem;
+  justify-content: center;
+  animation: wzdDone 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes wzdDone {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.wzd__doneIc {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #2f7d3f;
+  color: #fff;
+}
+.wzd__doneIc svg {
+  width: 26px;
+  height: 26px;
+}
+.wzd__doneTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.wzd__doneText {
+  font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+  line-height: 1.5;
+  color: #2a2a2a;
+  max-width: 32ch;
+}
+.wzd__sendErr {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #b4452f;
+  margin-top: -0.2rem;
+}
+.wzd__sendErr a {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* ---- nav ---- */
+.wzd__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.wzd__back {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.2rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgba(10, 10, 10, 0.55);
+  cursor: pointer;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+.wzd__back:hover {
+  color: var(--ink);
+}
+.wzd__back:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+.wzd__next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 0.7rem 0.7rem 1.4rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+.wzd__next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px -14px rgba(0, 0, 0, 0.5);
+}
+.wzd__next:active {
+  transform: scale(0.98);
+}
+.wzd__nextIc {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+}
+.wzd__nextIc svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wzd__next:hover .wzd__nextIc svg {
+  transform: translateX(3px);
+}
+
+/* footer */
+.cta__foot {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.55);
+}
+.cta__mono {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  border: 1px solid rgba(10, 10, 10, 0.3);
+  border-radius: 6px;
+  padding: 0.15rem 0.4rem;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 840px) {
+  .cta__main {
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 8vw, 3.5rem);
+    align-items: stretch;
+  }
+  .formwrap {
+    margin-inline: clamp(0.5rem, 3vw, 1.5rem);
+  }
+  /* this one points in from far right → would overflow a narrow column */
+  .doodle--r {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  /* keep just the two strongest cues so the small box stays uncluttered */
+  .doodle--tr,
+  .doodle--br {
+    display: none;
+  }
+  .doodle svg {
+    width: 42px;
+  }
+}
+@media (max-width: 620px) {
+  .cta__top {
+    flex-wrap: wrap;
+  }
+  .cta__clock {
+    order: 3;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta__dot {
+    animation: none;
+  }
+}

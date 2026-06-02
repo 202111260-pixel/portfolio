@@ -1,0 +1,292 @@
+/* ============================================================
+   ABOUT — "Behind the build" desk collage
+   A cream dossier with hand-written answers, a paper-clipped
+   B&W photo and a boarding pass, scattered on a soft surface.
+   ============================================================ */
+
+.about {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 70% 0%, #3f3f34, transparent 60%),
+    var(--olive);
+  color: var(--bone);
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3.5rem)
+    clamp(3.5rem, 8vw, 6.5rem);
+  overflow: hidden;
+}
+
+.about__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 0 auto clamp(1rem, 3vw, 2rem);
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.62rem, 1vw, 0.78rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+/* ---- the collage stage (scales as one unit via container units) ---- */
+.about__stage {
+  position: relative;
+  width: min(740px, 94vw);
+  margin: 0 auto;
+  /* taller stage gives the dossier room so the boarding pass overlaps
+     EMPTY paper instead of riding up over the story text on desktop */
+  aspect-ratio: 1 / 1.22;
+  container-type: inline-size;
+}
+
+/* shared paper feel */
+.doc,
+.pass {
+  box-shadow: 0 1.2cqw 3cqw -1cqw rgba(40, 36, 28, 0.28),
+    0 0.2cqw 0.6cqw rgba(40, 36, 28, 0.12);
+}
+
+/* ---- dossier ---- */
+.doc {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  width: 64cqw;
+  padding: 5.5cqw 6cqw 21cqw; /* extra bottom space so the pass overlaps empty paper, never text */
+  background:
+    repeating-linear-gradient(180deg, transparent, transparent 5.6cqw, rgba(40, 36, 28, 0.05) 5.6cqw, rgba(40, 36, 28, 0.05) calc(5.6cqw + 1px)),
+    #f6f3ea;
+  border: 1px solid rgba(40, 36, 28, 0.08);
+  z-index: 2;
+}
+.doc__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 4.4cqw;
+  letter-spacing: 0.02em;
+  color: #1a1712;
+  margin-bottom: 5cqw;
+  max-width: 44cqw; /* never run under the paper-clipped photo on the right */
+}
+.doc__field {
+  margin-bottom: 3.6cqw;
+}
+.doc__label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.1cqw;
+  letter-spacing: 0.14em;
+  color: #2a251d;
+  margin-bottom: 0.6cqw;
+}
+.doc__hand {
+  display: block;
+  font-family: var(--font-hand);
+  font-weight: 600;
+  font-size: 4cqw;
+  line-height: 1.25;
+  color: #2c2820;
+  max-width: 44cqw; /* wrap long lines (e.g. FOCUS) before they reach the photo */
+}
+.doc__story {
+  font-size: 3.4cqw;
+  line-height: 1.4;
+  max-width: 42cqw; /* wider = fewer lines = clears the boarding pass below */
+}
+.doc__ref {
+  position: absolute;
+  bottom: 2.4cqw;
+  right: 6cqw;
+  font-family: var(--font-mono, monospace);
+  font-size: 1.5cqw;
+  letter-spacing: 0.1em;
+  color: rgba(40, 36, 28, 0.4);
+}
+
+/* ---- accent card peeking behind the photo ---- */
+.accent {
+  position: absolute;
+  right: 5%;
+  top: 16%;
+  width: 26cqw;
+  height: 38cqw;
+  border-radius: 1.6cqw;
+  background: linear-gradient(150deg, var(--olive-raised), var(--olive));
+  box-shadow: 0 1cqw 2.5cqw -0.8cqw rgba(40, 36, 28, 0.4);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.6cqw;
+  color: var(--bone);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.6cqw;
+  letter-spacing: 0.06em;
+}
+
+/* ---- paper-clipped portrait ---- */
+.photo {
+  position: absolute;
+  right: 2%;
+  top: 22%;
+  width: 40cqw;
+  margin: 0;
+  padding: 1.4cqw 1.4cqw 1.4cqw;
+  background: #fcfbf7;
+  box-shadow: 0 1.6cqw 3.5cqw -1cqw rgba(40, 36, 28, 0.4),
+    0 0.3cqw 0.8cqw rgba(40, 36, 28, 0.16);
+  z-index: 5;
+}
+.photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 10%;
+  filter: grayscale(1) contrast(1.04);
+  background: #e9e7e0;
+}
+.photo__clip {
+  position: absolute;
+  top: -5cqw;
+  left: 8%;
+  width: 6cqw;
+  z-index: 6;
+  filter: drop-shadow(0 0.4cqw 0.4cqw rgba(0, 0, 0, 0.3));
+}
+.photo__clip .clip {
+  width: 100%;
+  height: auto;
+}
+
+/* ---- boarding pass ---- */
+.pass {
+  position: absolute;
+  left: 1%;
+  bottom: 5%;
+  width: 48cqw;
+  display: flex;
+  border-radius: 1.4cqw;
+  overflow: hidden;
+  background: #fbfaf6;
+  z-index: 7;
+}
+.pass__stub {
+  flex: 0 0 12cqw;
+  background: linear-gradient(160deg, #43433a, var(--olive));
+  color: var(--bone);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2cqw 1.6cqw;
+  position: relative;
+}
+.pass__stub::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  border-right: 1.5px dashed rgba(40, 36, 28, 0.3);
+}
+.pass__logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7cqw;
+  letter-spacing: 0.04em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.pass__flight {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.5cqw;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+.pass__body {
+  flex: 1;
+  padding: 2.6cqw 3cqw;
+  min-width: 0;
+}
+.pass__k {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 1.4cqw;
+  letter-spacing: 0.12em;
+  color: rgba(40, 36, 28, 0.5);
+}
+.pass__v {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4cqw;
+  letter-spacing: 0.01em;
+  color: #1f1b15;
+  white-space: nowrap;
+}
+.pass__name {
+  margin-bottom: 2.2cqw;
+}
+.pass__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.6cqw;
+  margin-bottom: 2.4cqw;
+}
+.pass__grid .pass__v {
+  font-size: 1.9cqw;
+}
+.pass__foot {
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  border-top: 1px solid rgba(40, 36, 28, 0.12);
+  padding-top: 1.8cqw;
+}
+.pass__barcode {
+  flex: 0 0 20cqw;
+  height: 5cqw;
+  background: repeating-linear-gradient(
+    90deg,
+    #1f1b15 0,
+    #1f1b15 0.5cqw,
+    transparent 0.5cqw,
+    transparent 1.1cqw
+  );
+}
+.pass__note {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.4cqw;
+  letter-spacing: 0.08em;
+  color: rgba(40, 36, 28, 0.55);
+}
+
+/* ============================================================
+   RESPONSIVE — collage scales via cq units; widen the stage a
+   touch on small screens so text stays legible.
+   ============================================================ */
+@media (max-width: 560px) {
+  .about__stage {
+    width: 100%;
+    aspect-ratio: 1 / 1.18;
+  }
+  .doc {
+    width: 72cqw;
+  }
+  .doc__title,
+  .doc__hand {
+    max-width: 40cqw;
+  }
+  .doc__story {
+    max-width: 38cqw;
+  }
+  .photo {
+    width: 44cqw;
+  }
+  .pass {
+    width: 62cqw;
+  }
+}

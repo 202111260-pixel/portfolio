@@ -1,0 +1,290 @@
+/* ============================================================
+   TECHNICAL SKILLS — moving logo ticker + grouped skill tiles
+   Real brand logos (Simple Icons): greyscale at rest, brand
+   colour + lift on hover. Tiles float gently. One marquee.
+   ============================================================ */
+
+.skills {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 3.5rem)
+    clamp(3.5rem, 8vw, 6rem);
+}
+
+/* faint blueprint dot-grid to set this section apart from neighbours */
+.skills__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(10, 10, 10, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    #000 40%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 70% at 50% 40%,
+    #000 40%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
+.skills__inner {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* ---- header ---- */
+.skills__head {
+  max-width: 40ch;
+}
+.skills__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  font-size: clamp(2.4rem, 7.5vw, 5.5rem);
+}
+.skills__sub {
+  margin-top: 0.9rem;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.5;
+  color: #2a2a2a;
+}
+.skills__hint {
+  color: rgba(10, 10, 10, 0.42);
+}
+
+/* ============================================================
+   ORBITAL SYSTEM — concentric rotating rings of real logos
+   Each ring is a category; logos counter-rotate to stay upright.
+   Hover the system to pause it; hover a node to reveal its label.
+   ============================================================ */
+.orbit {
+  position: relative;
+  width: min(560px, 86vw);
+  aspect-ratio: 1;
+  margin: clamp(2rem, 5vw, 3.5rem) auto clamp(0.5rem, 2vw, 1.5rem);
+  container-type: size;
+}
+
+/* central core */
+.orbit__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 19%;
+  height: 19%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  z-index: 6;
+  animation: corePulse 3s ease-out infinite;
+}
+@keyframes corePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(10, 10, 10, 0.22);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 22px rgba(10, 10, 10, 0);
+  }
+}
+.orbit__mono {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(0.9rem, 4.2cqmin, 1.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.orbit__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  user-select: none;
+  pointer-events: none;
+}
+.orbit__coreLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.5em;
+  z-index: 2;
+  font-size: clamp(0.4rem, 1.7cqmin, 0.62rem);
+  letter-spacing: 0.22em;
+  opacity: 0.95;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* rings — the rotating orbit circles */
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(2 * var(--r));
+  height: calc(2 * var(--r));
+  margin-left: calc(-1 * var(--r));
+  margin-top: calc(-1 * var(--r));
+  border-radius: 50%;
+  border: 1px dashed rgba(10, 10, 10, 0.13);
+  animation: orbit var(--dur) linear infinite;
+}
+.ring--1 {
+  --r: 16cqmin;
+  --dur: 28s;
+}
+.ring--2 {
+  --r: 27cqmin;
+  --dur: 38s;
+  animation-direction: reverse;
+}
+.ring--3 {
+  --r: 38cqmin;
+  --dur: 48s;
+}
+.ring--4 {
+  --r: 49cqmin;
+  --dur: 60s;
+  animation-direction: reverse;
+}
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* node — a point sitting on its ring */
+.node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--a)) translateY(calc(-1 * var(--r)));
+}
+/* center the chip on the point */
+.node__center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+/* counter-spin cancels the ring rotation so the chip stays upright */
+.node__spin {
+  display: block;
+  animation: orbit var(--dur) linear infinite reverse;
+}
+.ring--2 .node__spin,
+.ring--4 .node__spin {
+  animation-direction: normal;
+}
+/* cancel the placement angle so content is upright */
+.node__up {
+  position: relative;
+  display: grid;
+  place-items: center;
+  transform: rotate(calc(-1 * var(--a)));
+}
+
+/* the visible chip */
+.node__chip {
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 9cqmin, 54px);
+  height: clamp(38px, 9cqmin, 54px);
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  box-shadow: 0 10px 20px -10px rgba(28, 26, 20, 0.4);
+  color: #1a1a1a;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.node__chip img {
+  width: 54%;
+  height: 54%;
+  object-fit: contain;
+  /* full brand colour while orbiting */
+}
+.node__chip svg {
+  width: 54%;
+  height: 54%;
+}
+.node__chip .skill__mono {
+  border: none;
+  padding: 0;
+  font-size: clamp(0.55rem, 2.4cqmin, 0.75rem);
+}
+
+/* label revealed on node hover */
+.node__label {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 3px 9px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* node hover: pop, colourise, reveal label, raise */
+.node:hover {
+  z-index: 7;
+}
+.node__center:hover .node__chip {
+  transform: scale(1.32);
+  border-color: rgba(10, 10, 10, 0.16);
+  box-shadow: 0 16px 30px -12px rgba(28, 26, 20, 0.55);
+}
+.node__center:hover .node__label {
+  opacity: 1;
+}
+
+/* hover the whole system: freeze every orbit so it can be read */
+.orbit:hover .ring,
+.orbit:hover .node__spin,
+.orbit:hover .orbit__core {
+  animation-play-state: paused;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 760px) {
+  /* hover hint is irrelevant on touch */
+  .skills__hint {
+    display: none;
+  }
+  .orbit {
+    width: min(440px, 92vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .node__spin,
+  .orbit__core {
+    animation: none;
+  }
+}

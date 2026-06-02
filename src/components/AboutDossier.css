@@ -1,0 +1,384 @@
+/* ============================================================
+   ABOUT DOSSIER — expertise capability matrix infographic
+   Monochrome + olive. Green status dot is the only accent.
+   ============================================================ */
+
+.dossier {
+  --d-green: #3f8f4f;
+  --d-radius: 20px;
+  background: var(--olive);
+  color: var(--bone);
+  padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem);
+  display: flex;
+  justify-content: center;
+}
+
+.dossier *::selection {
+  background: var(--bone);
+  color: var(--olive);
+}
+
+/* ---------- SHEET ---------- */
+.dossier__sheet {
+  position: relative;
+  width: min(1120px, 100%);
+  background: var(--olive-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--d-radius);
+  padding: clamp(1.6rem, 3.4vw, 3rem);
+  box-shadow:
+    0 1px 0 rgba(233, 231, 221, 0.06) inset,
+    0 40px 90px -50px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+/* faint engineering grid in the backdrop */
+.dossier__sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.dossier__crosshair {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+.dossier__crosshair::before,
+.dossier__crosshair::after {
+  content: "";
+  position: absolute;
+  background: var(--bone-dim);
+}
+.dossier__crosshair::before { inset: 50% 0 auto 0; height: 1px; }
+.dossier__crosshair::after { inset: 0 50% 0 auto; width: 1px; }
+.dossier__crosshair--tl { top: 14px; left: 14px; }
+.dossier__crosshair--br { bottom: 14px; right: 14px; }
+
+/* ---------- HEADER ---------- */
+.dossier__head {
+  position: relative;
+  z-index: 1;
+}
+.dossier__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--bone-dim);
+  text-transform: uppercase;
+}
+.dossier__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--d-green);
+  box-shadow: 0 0 0 0 rgba(63, 143, 79, 0.6);
+  animation: dossierPulse 2.6s ease-out infinite;
+}
+.dossier__sep { color: var(--hairline); }
+
+.dossier__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-top: 0.7rem;
+}
+.dossier__sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  color: var(--bone-dim);
+  margin-top: 0.6rem;
+}
+.dossier__role { color: var(--bone); }
+
+.dossier__rev {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--bone-dim);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.32rem 0.7rem;
+}
+
+.dossier__rule {
+  border: 0;
+  height: 1px;
+  background: var(--hairline);
+  margin: clamp(1.4rem, 3vw, 2.2rem) 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- BODY ---------- */
+.dossier__body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: clamp(1.4rem, 3.5vw, 3rem);
+  align-items: start;
+}
+
+/* RADAR */
+.dossier__radar {
+  margin: 0;
+}
+.dossier__radarCap,
+.timeline__cap {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  color: var(--bone-dim);
+  text-transform: uppercase;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 1rem;
+}
+
+.radar {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.radar__ring {
+  fill: none;
+  stroke: var(--hairline);
+  stroke-width: 1;
+}
+.radar__spoke {
+  stroke: var(--hairline);
+  stroke-width: 1;
+}
+.radar__axisLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  fill: var(--bone-dim);
+}
+.radar__shapeStroke {
+  fill: none;
+  stroke: var(--bone);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+.radar__vertex {
+  fill: var(--olive);
+  stroke: var(--bone);
+  stroke-width: 1.6;
+}
+.radar__center {
+  stroke: var(--bone-dim);
+  stroke-width: 1;
+}
+
+/* LEGEND */
+.dossier__legend {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+.legend__row {
+  display: grid;
+  gap: 0.55rem;
+}
+.legend__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.legend__id {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--bone-dim);
+  letter-spacing: 0.1em;
+}
+.legend__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  letter-spacing: -0.01em;
+  margin-right: auto;
+}
+.legend__pct {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--bone);
+  letter-spacing: 0.02em;
+}
+.legend__pct i {
+  font-style: normal;
+  font-size: 0.7em;
+  color: var(--bone-dim);
+}
+.legend__bar {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--hairline);
+  overflow: hidden;
+}
+.legend__barFill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--bone);
+  transform-origin: left center;
+}
+.legend__chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+}
+.legend__chip {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--bone-dim);
+  border: 1px solid var(--hairline);
+  border-radius: 7px;
+  padding: 0.28rem 0.55rem;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.legend__row:hover .legend__chip {
+  color: var(--bone);
+  border-color: var(--bone-dim);
+}
+
+/* ---------- TIMELINE ---------- */
+.dossier__timeline {
+  position: relative;
+  z-index: 1;
+}
+.timeline__track {
+  list-style: none;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-top: 1.6rem;
+}
+.timeline__line {
+  position: absolute;
+  top: calc(1.6rem + 5px);
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--bone-dim);
+  transform-origin: left center;
+  z-index: 0;
+}
+.timeline__stop {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  padding-top: 1.6rem;
+}
+.timeline__node {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--olive-raised);
+  border: 1.6px solid var(--bone);
+  z-index: 1;
+}
+.timeline__stop:first-child .timeline__node {
+  background: var(--d-green);
+  border-color: var(--d-green);
+  box-shadow: 0 0 0 4px rgba(63, 143, 79, 0.16);
+}
+.timeline__year {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  color: var(--bone-dim);
+}
+.timeline__label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  line-height: 1.12;
+}
+.timeline__note {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--bone-dim);
+}
+
+/* ---------- MOTION KEYFRAMES ---------- */
+@keyframes dossierPulse {
+  0% { box-shadow: 0 0 0 0 rgba(63, 143, 79, 0.55); }
+  70% { box-shadow: 0 0 0 7px rgba(63, 143, 79, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(63, 143, 79, 0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+  .dossier__body {
+    grid-template-columns: 1fr;
+  }
+  .dossier__radar {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .dossier__rev {
+    position: static;
+    display: inline-block;
+    margin-top: 0.9rem;
+  }
+  .timeline__track {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 0.4rem;
+  }
+  /* vertical connector on mobile */
+  .timeline__line {
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    transform-origin: top center;
+  }
+  .timeline__stop {
+    padding: 0.9rem 0 0.9rem 1.6rem;
+  }
+  .timeline__node {
+    top: 1.05rem;
+    left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dossier__dot {
+    animation: none;
+  }
+  .dossier * {
+    transition: none !important;
+  }
+}

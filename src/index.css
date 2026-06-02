@@ -1,0 +1,67 @@
+/* ============================================================
+   GLOBAL RESET + DESIGN TOKENS
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto; /* Lenis drives smooth scroll (see App.jsx) */
+}
+
+/* anchored sections clear the floating navbar */
+#home,
+#about,
+#skills,
+#work,
+#contact {
+  scroll-margin-top: 90px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:root {
+  /* Type families */
+  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-hand: "Caveat", "Segoe Script", cursive;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Cover (B&W magazine) palette */
+  --paper: #f0efed;
+  --ink: #0a0a0a;
+
+  /* Founder (olive) palette */
+  --olive: #38382f;
+  --olive-raised: #43433a;
+  --bone: #e9e7dd;
+  --bone-dim: rgba(233, 231, 221, 0.62);
+  --hairline: rgba(233, 231, 221, 0.28);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+}
