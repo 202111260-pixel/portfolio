@@ -276,9 +276,7 @@
   }
   .doc {
     width: 72cqw;
-    /* extra empty paper at the bottom so the pass sits ON the dossier
-       (overlapping paper) while the story text stays well above it */
-    padding-bottom: 34cqw;
+    padding-bottom: 16cqw; /* a little empty paper below the story */
   }
   .doc__title,
   .doc__hand {
@@ -292,5 +290,6 @@
   }
   .pass {
     width: 78cqw; /* wider so it reads as a rectangle, not a square */
+    bottom: 18%; /* raised up so it overlaps the dossier paper, not float below */
   }
 }

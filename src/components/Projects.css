@@ -381,9 +381,11 @@
   .card__media {
     order: 2;
     width: 100%;
-    max-width: 520px;
+    max-width: 440px;
     height: auto;
-    aspect-ratio: 1 / 1;
+    /* shorter box so the photos fit in view under the text instead of
+       being pushed off the bottom of the pinned card */
+    aspect-ratio: 4 / 3;
     margin-inline: auto;
   }
   .shot {
@@ -394,6 +396,25 @@
   }
   .soloshot {
     opacity: 1 !important;
+  }
+  /* tighten the copy on phones so text + photos share the screen */
+  .card__inner {
+    padding-top: clamp(3.75rem, 11vh, 5.5rem);
+    padding-bottom: 1.75rem;
+  }
+  .card__title {
+    font-size: clamp(1.7rem, 7vw, 2.3rem);
+  }
+  .card__blurb {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-top: 0.85rem;
+  }
+  .card__stats {
+    margin-top: 1rem;
+  }
+  .card__tech {
+    margin-top: 0.9rem;
   }
   .card__bigindex {
     font-size: 40vh;
