@@ -161,15 +161,21 @@ export default function ThankYou() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("idle"); // idle | sending | ok | error
   const fieldRef = useRef(null);
+  const mounted = useRef(false);
   const inView = { once: true, amount: 0.3 };
 
   const current = steps[step];
   const isLast = step === steps.length - 1;
   const progress = (step / (steps.length - 1)) * 100;
 
-  // focus the field whenever the step changes
+  // focus the field when the step changes — but NOT on first mount
+  // (focusing on load would scroll the page down to the contact form)
   useEffect(() => {
-    const id = requestAnimationFrame(() => fieldRef.current?.focus());
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    const id = requestAnimationFrame(() => fieldRef.current?.focus({ preventScroll: true }));
     return () => cancelAnimationFrame(id);
   }, [step]);
 
