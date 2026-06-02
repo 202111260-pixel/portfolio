@@ -388,6 +388,12 @@
   }
   .shot {
     transform: none !important; /* no drift → every photo stays in its box */
+    /* the scroll-reveal can mis-fire under the sticky stack on mobile and
+       leave photos stuck at opacity 0 — force them visible */
+    opacity: 1 !important;
+  }
+  .soloshot {
+    opacity: 1 !important;
   }
   .card__bigindex {
     font-size: 40vh;
