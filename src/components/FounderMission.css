@@ -35,7 +35,7 @@
   margin: 0 auto;
   /* taller stage gives the dossier room so the boarding pass overlaps
      EMPTY paper instead of riding up over the story text on desktop */
-  aspect-ratio: 1 / 1.28;
+  aspect-ratio: 1 / 1.2;
   container-type: inline-size;
 }
 

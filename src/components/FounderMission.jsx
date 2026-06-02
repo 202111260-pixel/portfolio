@@ -83,11 +83,6 @@ export default function FounderMission() {
           </div>
 
           <div className="doc__field">
-            <span className="doc__label">FOCUS</span>
-            <span className="doc__hand">{about.focus}</span>
-          </div>
-
-          <div className="doc__field">
             <span className="doc__label">TELL US ABOUT YOUR STORY</span>
             <p className="doc__hand doc__story">{about.story}</p>
           </div>
