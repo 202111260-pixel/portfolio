@@ -13,7 +13,7 @@ const about = {
   name: "Mohammed Al Hajri",
   focus: "Full-Stack engineering & AI / LLMs",
   story:
-    "Business Computing graduate from GCET, Oman (2021–2026). My graduation project — a CSR platform built on the UN SDGs — was the top project in my specialization.",
+    "Business Computing graduate from GCET, Oman (2021–2026). Open to freelance & full-stack/AI roles. Skilled in n8n, web & app development, integrating motion graphics and infographics.",
   photo: "/me.jpeg",
   pass: {
     name: "AL HAJRI / MOHAMMED",
