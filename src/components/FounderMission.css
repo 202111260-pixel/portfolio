@@ -232,12 +232,13 @@
 }
 .pass__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1.6cqw;
+  grid-template-columns: 1fr 1fr;
+  gap: 2cqw 2.4cqw;
   margin-bottom: 2.4cqw;
 }
 .pass__grid .pass__v {
-  font-size: 1.9cqw;
+  font-size: 2cqw;
+  white-space: normal; /* let long values (MUSCAT, OMAN) sit fully, no clipping */
 }
 .pass__foot {
   display: flex;
